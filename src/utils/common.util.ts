@@ -1,3 +1,5 @@
+import logger from "../config/logger";
+
 type CustomObj = {
     [key: string]: any;
 }
@@ -16,4 +18,12 @@ export class CommonUtil {
     static isEmpty = (value: any): boolean => typeof value == undefined || value == '' || value == null || value.length == 0;
 
 
+}
+
+export function printError(dir = __dirname, location:string ,errorMsg: string){
+    logger.error(`
+    file path: ${dir}
+    location: ${location}
+    errorMsg: ${errorMsg} 
+    `);
 }

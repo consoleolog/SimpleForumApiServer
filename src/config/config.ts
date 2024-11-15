@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import path from 'path';
 import Joi, {valid} from "joi";
 import logger from "./logger";
+import {printError} from "../utils/common.util";
 
 export type NodeEnv = "development" | "production" | "test";
 
@@ -75,10 +76,11 @@ const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' }
 };
 
 if (error){
-    logger.error(error);
-    throw new Error(`location: config/config  
-                     where: envVarsSchema.prefs Error: ${error} 
-                     `);
+    printError(__dirname,"envVarsSchema.prefs", error as unknown as string )
+    throw new Error(
+        `location: config/config  
+         where: envVarsSchema.prefs Error: ${error} 
+    `);
 }
 
 export default {
