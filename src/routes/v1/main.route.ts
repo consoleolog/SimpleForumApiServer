@@ -1,11 +1,13 @@
 import { Router } from "express";
+import {jwtCheck} from "../../middlewares/jwt.middleware";
 
 const router = Router();
 
-router.get('/', (req, res, next) => {
+router.get('/', jwtCheck, (req, res, next) => {
 
 
-    res.json('asd')
+
+    res.status(200).json("");
 });
 
 

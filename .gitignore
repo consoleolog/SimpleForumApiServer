@@ -5,3 +5,13 @@ pnpm-lock.yaml
 package-lock.json
 yarn.lock
 /logs
+
+
+# Enviroment
+dev.env
+
+# vscode
+.vscode
+
+# generate validations interface
+src/interfaces/validations/*.ts

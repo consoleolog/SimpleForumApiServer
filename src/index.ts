@@ -1,21 +1,18 @@
-import {Server} from "node:http";
-
-
 import app from "./app";
 import logger from "./config/logger";
-import { MongoClient } from "mongodb";
+import {connectDB} from "./config/database";
+import * as http from "node:http";
+import config from "./config/config";
 
-
-let server: Server;
-
-const uri = "mongodb+srv://admin:mongodb!123@cluster0.1o0bw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+let server: http.Server;
 
 let db;
 
-new MongoClient(uri).connect().then((client) => {
+connectDB.then((client) => {
     logger.info('DB connected Success');
 
-    db = client.db('simple-forum');
+
+    db = client.db(config.db.database);
     
     // DB 연결 확인
     if (!db) {
@@ -23,10 +20,11 @@ new MongoClient(uri).connect().then((client) => {
         process.exit(1); // DB 연결 실패 시 앱 종료
     }
 
-    server = app.listen(8080, () => {
-        logger.info(`Listening to port 8080`);
+    server = app.listen(config.port, () => {
+        logger.info(`Listening to port ${config.port}`);
         logger.info(`http://localhost:8080/v1`);
     });
+
 }).catch((error) => {
     logger.error(`DB connect error: ${error}`);
     process.exit(1); // DB 연결 실패 시 앱 종료
