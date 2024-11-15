@@ -1,6 +1,5 @@
 import { Router } from "express"
 import mainRoute from "./main.route";
-import accountRoute from "./account.route"
 import authRoute from "./auth.route";
 import docsRoute from "./docs.route";
 import config from "../../config/config";
@@ -11,10 +10,6 @@ const defaultRoutes = [
     {
         path: '/',
         route: mainRoute,
-    },
-    {
-        path: '/accounts',
-        route: accountRoute,
     },
     {
         path: '/auth',

@@ -3,7 +3,7 @@ import {ResponseData} from "./responseData";
 
 export class ApiResponse {
 
-    timestamp = new Date().toISOString();
+    timestamp:string;
 
     statusCode: number;
 
@@ -17,6 +17,7 @@ export class ApiResponse {
 
     constructor(statusCode:number, responseData: ResponseData, isOperational: boolean = true) {
         const { name, responseCode, message } = responseData;
+        this.timestamp = new Date().toISOString();
         this.statusCode = statusCode;
         this.name = name;
         this.responseCode = responseCode;
@@ -24,5 +25,3 @@ export class ApiResponse {
         this.isOperational = isOperational;
     }
 }
-
-export {}

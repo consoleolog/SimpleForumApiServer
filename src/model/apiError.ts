@@ -3,6 +3,9 @@ import {CommonUtil} from "../utils/common.util";
 
 
 export class ApiError extends Error {
+
+    timestamp: string;
+
     statusCode: number;
 
     name: string;
@@ -18,6 +21,7 @@ export class ApiError extends Error {
     constructor(statusCode: number, errorData: ErrorData, isOperational: boolean = true, stack = '' ) {
         const { name, errorCode, message } = errorData;
         super(message);
+        this.timestamp = new Date().toISOString();
         this.statusCode = statusCode;
         this.name = name;
         this.errorCode = errorCode;
@@ -29,6 +33,4 @@ export class ApiError extends Error {
             Error.captureStackTrace(this, this.constructor);
         }
     }
-
-
 }
