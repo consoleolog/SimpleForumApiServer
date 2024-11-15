@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 
-type RequestType = 'params' | 'query' | 'body';
+type RequestType = 'params' | 'query' | 'body' | 'headers' | 'cookies';
 
 export interface RequestJoiSchema extends Joi.ObjectSchema<Partial<Record<RequestType, Joi.ObjectSchema>>> {}
 
