@@ -1,1 +1,5 @@
-export * as authController from "./auth.controller";
+import { authService } from "../services";
+import { AuthController } from "./auth.controller";
+
+
+export const authController = new AuthController(authService);

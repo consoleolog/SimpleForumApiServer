@@ -1,13 +1,23 @@
 import catchAsync from "../utils/catchAsync";
 import {AccountDto} from "../model/account.dto";
-import { authService } from "../services/";
 import {ApiResponse} from "../model/apiResponse";
+import { AuthService } from "../services/auth.service";
 
 
-export const register = catchAsync(async (req, res) => {
-    const account = req.body as AccountDto;
+export class AuthController {
 
-    const result = await authService.register(account) as ApiResponse;
+    private readonly authService: AuthService;
 
-    res.status(result.statusCode).json(result);
-})
+    constructor(authService: AuthService){
+        this.authService = authService;
+    }
+
+    register = catchAsync(async (req, res)=>{
+        const account = req.body as AccountDto;
+
+        const result = await this.authService.register(account) as ApiResponse;
+    
+        res.status(result.statusCode).json(result);
+    });
+
+}
